@@ -15,10 +15,20 @@ export class S2026Q2CCdkSebastianRamirezStack extends cdk.Stack {
         exports.handler = async (event) => {
           return {
             statusCode: 200,
-            body: JSON.stringify('Hello, World!'),
+            body: JSON.stringify('Hello CDK! '),
           };
         };
       `),
+    });
+
+    // Define the lambda function URL resource
+    const myFunctionUrl = myFunction.addFunctionUrl({
+      authType: lambda.FunctionUrlAuthType.NONE,
+    });
+
+    // Define a CloudFormation output for your URL
+    new cdk.CfnOutput(this, "myFunctionUrlOutput", {
+      value: myFunctionUrl.url,
     });
 
     // The code that defines your stack goes here
